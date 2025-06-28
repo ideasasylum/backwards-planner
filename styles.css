@@ -631,9 +631,9 @@ body {
     }
     
     .stream-header {
-        flex-direction: column;
+        flex-direction: row;
         gap: var(--space-sm);
-        align-items: stretch;
+        align-items: center;
     }
     
     
