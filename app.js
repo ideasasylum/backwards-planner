@@ -369,7 +369,7 @@ class BackwardsTimer {
 
     formatTime(date) {
         return date.toLocaleTimeString('en-US', {
-            hour: '2-digit',
+            hour: 'numeric',
             minute: '2-digit',
             hour12: true
         });
