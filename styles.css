@@ -553,6 +553,11 @@ body {
         padding: var(--space-md) 20px;
     }
     
+    .project-section,
+    .timeline-section {
+        padding: var(--space-lg) var(--space-md);
+    }
+    
     .header {
         flex-direction: column;
         gap: var(--space-md);
@@ -621,7 +626,13 @@ body {
 
 @media (max-width: 480px) {
     .app {
-        padding: var(--space-sm) 15px;
+        padding: var(--space-sm) 0;
+    }
+    
+    .project-section,
+    .timeline-section {
+        margin: 0 15px;
+        padding: var(--space-lg) var(--space-md);
     }
     
     .header h1 {
