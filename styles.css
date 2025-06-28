@@ -550,7 +550,7 @@ body {
 
 @media (max-width: 768px) {
     .app {
-        padding: var(--space-md);
+        padding: var(--space-md) 20px;
     }
     
     .header {
@@ -621,7 +621,7 @@ body {
 
 @media (max-width: 480px) {
     .app {
-        padding: var(--space-sm);
+        padding: var(--space-sm) 15px;
     }
     
     .header h1 {
