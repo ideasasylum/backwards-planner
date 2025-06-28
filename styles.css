@@ -43,15 +43,17 @@ body {
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
 }
 
 .header h1 {
     font-size: 2.25rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: var(--space-sm);
+    margin: 0;
     letter-spacing: -0.025em;
 }
 
@@ -59,6 +61,37 @@ body {
     color: var(--text-secondary);
     font-size: 1rem;
     font-weight: 400;
+}
+
+.project-controls {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 40px;
+    height: 40px;
+}
+
+.icon-btn:hover {
+    background: var(--border-light);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+.icon-btn svg {
+    width: 16px;
+    height: 16px;
 }
 
 .main {
@@ -390,12 +423,6 @@ body {
     font-weight: 600;
 }
 
-.controls {
-    display: flex;
-    gap: var(--space-md);
-    justify-content: flex-end;
-    margin-top: var(--space-xl);
-}
 
 .btn {
     padding: var(--space-sm) var(--space-lg);
@@ -433,6 +460,8 @@ body {
     }
     
     .header {
+        flex-direction: column;
+        gap: var(--space-md);
         margin-bottom: var(--space-lg);
     }
     
@@ -479,10 +508,6 @@ body {
         width: 60px;
     }
     
-    .controls {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
 }
 
 @media (max-width: 480px) {
@@ -529,7 +554,4 @@ body {
         gap: var(--space-xs);
     }
     
-    .controls {
-        flex-direction: column;
-    }
 }
