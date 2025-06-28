@@ -493,6 +493,10 @@ body {
     border-radius: var(--radius);
 }
 
+.timeline-task:last-child {
+    margin-bottom: 50px;
+}
+
 .task-start-time {
     font-weight: 500;
     color: var(--primary-color);
