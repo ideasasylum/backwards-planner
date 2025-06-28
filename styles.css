@@ -632,7 +632,7 @@ body {
     .project-section,
     .timeline-section {
         margin: 0 15px;
-        padding: var(--space-lg) var(--space-md);
+        padding: var(--space-xs);
     }
     
     .header h1 {
