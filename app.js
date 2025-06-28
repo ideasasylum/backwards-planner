@@ -75,7 +75,7 @@ class BackwardsTimer {
     addStream() {
         const project = this.getCurrentProject();
         const stream = this.createStream(`Stream ${project.streams.length + 1}`);
-        stream.tasks.push(this.createTask('Task 1', 30));
+        stream.tasks.push(this.createTask('Step 1', 30));
         project.streams.push(stream);
         this.renderStreams();
     }
@@ -98,7 +98,7 @@ class BackwardsTimer {
         const project = this.getCurrentProject();
         const stream = project.streams.find(s => s.id === streamId);
         if (stream) {
-            stream.tasks.push(this.createTask(`Task ${stream.tasks.length + 1}`, 15));
+            stream.tasks.push(this.createTask(`Step ${stream.tasks.length + 1}`, 15));
             this.renderStreams();
         }
     }
@@ -185,10 +185,10 @@ class BackwardsTimer {
         streamDiv.className = 'stream';
         streamDiv.innerHTML = `
             <div class="stream-header">
-                <input type="text" class="stream-name-input" value="${stream.name}" 
+                <input type="text" class="stream-name-input" value="${stream.name}" placeholder="Name"
                        onchange="app.updateStreamName('${stream.id}', this.value)">
                 <div class="stream-actions">
-                    <button class="add-task-btn" onclick="app.addTask('${stream.id}')">+ Add Task</button>
+                    <button class="add-task-btn" onclick="app.addTask('${stream.id}')">+ Add Step</button>
                     <button class="remove-stream-btn" onclick="app.removeStream('${stream.id}')">Remove</button>
                 </div>
             </div>
@@ -203,7 +203,7 @@ class BackwardsTimer {
         return `
             <div class="task" draggable="true" data-task-id="${task.id}" data-stream-id="${streamId}">
                 <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
-                <input type="text" class="task-name-input" value="${task.name}" 
+                <input type="text" class="task-name-input" value="${task.name}" placeholder="Step"
                        onchange="app.updateTaskName('${streamId}', '${task.id}', this.value)">
                 <input type="number" class="task-duration-input" value="${task.duration}" 
                        placeholder="Minutes" min="1"
@@ -256,7 +256,7 @@ class BackwardsTimer {
         container.innerHTML = '';
         
         if (allTasks.length === 0) {
-            container.innerHTML = '<p>No tasks to display</p>';
+            container.innerHTML = '<p>No steps to display</p>';
             return;
         }
 
