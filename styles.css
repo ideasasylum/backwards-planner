@@ -630,7 +630,7 @@ body {
     
     .project-section,
     .timeline-section {
-        margin: 0 15px;
+        margin: 0 10px;
         padding: var(--space-xs);
     }
     
