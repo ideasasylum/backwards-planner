@@ -358,6 +358,7 @@ body {
     border-radius: var(--radius);
     font-weight: 500;
     color: var(--text-primary);
+    font-size: 1rem;
 }
 
 .task-name-input:focus {
@@ -375,6 +376,7 @@ body {
     text-align: center;
     font-weight: 500;
     color: var(--text-primary);
+    font-size: 1rem;
 }
 
 .task-duration-input:focus {
@@ -582,7 +584,12 @@ body {
     }
     
     .stream-name-input {
-        font-size: 1rem;
+        font-size: 1.125rem;
+    }
+    
+    .task-name-input,
+    .task-duration-input {
+        font-size: 1.125rem;
     }
     
     .task {
@@ -627,6 +634,12 @@ body {
     }
     
     .project-name-input {
+        font-size: 1.125rem;
+    }
+    
+    .stream-name-input,
+    .task-name-input,
+    .task-duration-input {
         font-size: 1.125rem;
     }
     
