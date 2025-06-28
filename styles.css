@@ -552,7 +552,7 @@ body {
     
     .project-section,
     .timeline-section {
-        padding: var(--space-lg) var(--space-md);
+        padding: var(--space-lg) 0;
     }
     
     .header {
@@ -631,7 +631,7 @@ body {
     .project-section,
     .timeline-section {
         margin: 0;
-        padding: var(--space-md);
+        padding: var(--space-md) 0;
     }
     
     .header h1 {
