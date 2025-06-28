@@ -603,7 +603,8 @@ body {
     }
     
     .task .task-duration-input {
-        width: 60px;
+        width: 70px;
+        min-width: 60px;
     }
     
     .task .task-name-input {
@@ -625,13 +626,13 @@ body {
 
 @media (max-width: 480px) {
     .app {
-        padding: var(--space-sm) 0;
+        padding: var(--space-sm);
     }
     
     .project-section,
     .timeline-section {
-        margin: 0 10px;
-        padding: var(--space-xs);
+        margin: 0;
+        padding: var(--space-md);
     }
     
     .header h1 {
@@ -667,11 +668,14 @@ body {
     .task .task-name-input {
         grid-column: 1;
         grid-row: 1;
+        min-width: 0;
     }
     
     .task .task-duration-input {
         grid-column: 2;
         grid-row: 1;
+        width: 60px;
+        flex-shrink: 0;
     }
     
     .task .remove-task-btn {
