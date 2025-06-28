@@ -187,12 +187,14 @@ class BackwardsTimer {
             <div class="stream-header">
                 <input type="text" class="stream-name-input" value="${stream.name}" 
                        onchange="app.updateStreamName('${stream.id}', this.value)">
-                <button class="remove-stream-btn" onclick="app.removeStream('${stream.id}')">Remove</button>
+                <div class="stream-actions">
+                    <button class="add-task-btn" onclick="app.addTask('${stream.id}')">+ Add Task</button>
+                    <button class="remove-stream-btn" onclick="app.removeStream('${stream.id}')">Remove</button>
+                </div>
             </div>
             <div class="tasks-container" id="tasks-${stream.id}">
                 ${stream.tasks.map(task => this.createTaskHTML(stream.id, task)).join('')}
             </div>
-            <button class="add-task-btn" onclick="app.addTask('${stream.id}')">+ Add Task</button>
         `;
         return streamDiv;
     }
