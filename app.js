@@ -389,18 +389,56 @@ class BackwardsTimer {
             return;
         }
         
-        const projectList = projectKeys.map(key => {
-            const project = this.projects[key];
-            return `${key}: ${project.name || 'Unnamed Project'}`;
-        }).join('\n');
+        this.showProjectSelector();
+    }
+
+    showProjectSelector() {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        overlay.innerHTML = `
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>Load Project</h3>
+                    <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+                </div>
+                <div class="modal-content">
+                    <div class="project-list">
+                        ${Object.keys(this.projects).map(key => {
+                            const project = this.projects[key];
+                            return `
+                                <div class="project-item" data-project-id="${key}">
+                                    <div class="project-name">${project.name || 'Unnamed Project'}</div>
+                                    <div class="project-info">
+                                        ${project.streams?.length || 0} streams • 
+                                        ${project.targetFinishTime ? new Date(project.targetFinishTime).toLocaleString() : 'No target time'}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
         
-        const selectedKey = prompt(`Select a project to load:\n${projectList}\n\nEnter project ID:`);
+        // Add click handlers for project items
+        overlay.addEventListener('click', (e) => {
+            if (e.target.closest('.project-item')) {
+                const projectId = e.target.closest('.project-item').dataset.projectId;
+                this.loadProjectById(projectId);
+                overlay.remove();
+            } else if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
         
-        if (selectedKey && this.projects[selectedKey]) {
-            this.currentProject = this.deserializeProject({ ...this.projects[selectedKey] });
-            localStorage.setItem('lastProjectId', selectedKey);
+        document.body.appendChild(overlay);
+    }
+
+    loadProjectById(projectId) {
+        if (this.projects[projectId]) {
+            this.currentProject = this.deserializeProject({ ...this.projects[projectId] });
+            localStorage.setItem('lastProjectId', projectId);
             this.loadProjectToUI();
-            alert('Project loaded!');
         }
     }
 
