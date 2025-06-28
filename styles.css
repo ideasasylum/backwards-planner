@@ -100,9 +100,6 @@ body {
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    padding: var(--space-md);
-    background: var(--border-light);
-    border-radius: var(--radius);
 }
 
 .target-time-section label {
@@ -114,7 +111,7 @@ body {
 .target-time-input {
     padding: var(--space-sm);
     border: none;
-    background: var(--surface);
+    background: var(--border-light);
     border-radius: var(--radius);
     font-size: 1rem;
     font-weight: 500;
@@ -122,6 +119,7 @@ body {
 
 .target-time-input:focus {
     outline: none;
+    background: var(--surface);
     box-shadow: 0 0 0 2px var(--primary-color);
 }
 
