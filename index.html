@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backwards Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>Backwards Timer</h1>
+            <p class="subtitle">Coordinate multiple streams to finish together</p>
+        </header>
+
+        <main class="main">
+            <div class="project-section">
+                <div class="project-header">
+                    <input type="text" id="projectName" placeholder="Project name" class="project-name-input">
+                    <div class="target-time-section">
+                        <label for="targetTime">Target finish time:</label>
+                        <input type="datetime-local" id="targetTime" class="target-time-input">
+                    </div>
+                </div>
+
+                <div class="streams-container" id="streamsContainer">
+                    <!-- Streams will be added here dynamically -->
+                </div>
+
+                <button class="add-stream-btn" id="addStreamBtn">+ Add Stream</button>
+            </div>
+
+            <div class="timeline-section">
+                <h2>Timeline</h2>
+                <div class="timeline-container" id="timelineContainer">
+                    <!-- Timeline will be generated here -->
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn primary" id="calculateBtn">Calculate Timeline</button>
+                <button class="btn secondary" id="saveBtn">Save Project</button>
+                <button class="btn secondary" id="loadBtn">Load Project</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
