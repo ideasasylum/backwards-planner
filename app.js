@@ -12,7 +12,6 @@ class BackwardsTimer {
 
     bindEvents() {
         document.getElementById('addStreamBtn').addEventListener('click', () => this.addStream());
-        document.getElementById('calculateBtn').addEventListener('click', () => this.calculateTimeline());
         document.getElementById('saveBtn').addEventListener('click', () => this.saveProject());
         document.getElementById('loadBtn').addEventListener('click', () => this.loadProject());
         
@@ -70,6 +69,7 @@ class BackwardsTimer {
         if (timeString) {
             this.getCurrentProject().targetFinishTime = new Date(timeString);
         }
+        this.autoCalculateTimeline();
     }
 
     addStream() {
@@ -140,6 +140,7 @@ class BackwardsTimer {
                 task.duration = parseInt(duration) || 0;
             }
         }
+        this.autoCalculateTimeline();
     }
 
     calculateTimeline() {
@@ -147,6 +148,30 @@ class BackwardsTimer {
         
         if (!project.targetFinishTime) {
             alert('Please set a target finish time');
+            return;
+        }
+
+        const targetTime = project.targetFinishTime;
+
+        project.streams.forEach(stream => {
+            let currentTime = new Date(targetTime);
+            
+            // Calculate backwards from finish time
+            for (let i = stream.tasks.length - 1; i >= 0; i--) {
+                const task = stream.tasks[i];
+                currentTime = new Date(currentTime.getTime() - (task.duration * 60 * 1000));
+                task.startTime = new Date(currentTime);
+            }
+        });
+
+        this.renderTimeline();
+    }
+
+    autoCalculateTimeline() {
+        const project = this.getCurrentProject();
+        
+        if (!project.targetFinishTime) {
+            this.renderTimeline();
             return;
         }
 
@@ -178,6 +203,7 @@ class BackwardsTimer {
         });
         
         this.attachDragListeners();
+        this.autoCalculateTimeline();
     }
 
     createStreamElement(stream) {
