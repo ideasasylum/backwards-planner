@@ -556,6 +556,7 @@ body {
         flex-direction: column;
         gap: var(--space-md);
         margin-bottom: var(--space-lg);
+        padding: 0;
     }
     
     .header h1 {
