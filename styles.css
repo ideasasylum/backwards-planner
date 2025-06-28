@@ -254,7 +254,7 @@ body {
 
 .streams-container {
     display: grid;
-    gap: var(--space-lg);
+    gap: 0;
     margin-bottom: var(--space-lg);
 }
 
