@@ -276,6 +276,10 @@ body {
 }
 
 .stream-name-input {
+    min-width: 0;
+}
+
+.stream-name-input {
     padding: var(--space-sm);
     border: none;
     background: var(--surface);
@@ -284,6 +288,7 @@ body {
     font-size: 1.125rem;
     color: var(--text-primary);
     flex: 1;
+    min-width: 0;
 }
 
 .stream-name-input:focus {
