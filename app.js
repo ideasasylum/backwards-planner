@@ -74,7 +74,7 @@ class BackwardsTimer {
 
     addStream() {
         const project = this.getCurrentProject();
-        const stream = this.createStream(`Stream ${project.streams.length + 1}`);
+        const stream = this.createStream('');
         stream.tasks.push(this.createTask('Step 1', 30));
         project.streams.push(stream);
         this.renderStreams();
