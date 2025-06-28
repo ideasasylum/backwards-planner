@@ -373,7 +373,7 @@ body {
     border: none;
     background: var(--border-light);
     border-radius: var(--radius);
-    width: 80px;
+    width: 90px;
     text-align: center;
     font-weight: 500;
     color: var(--text-primary);
@@ -599,8 +599,8 @@ body {
     }
     
     .task .task-duration-input {
-        width: 70px;
-        min-width: 60px;
+        width: 80px;
+        min-width: 70px;
     }
     
     .task .task-name-input {
@@ -670,7 +670,7 @@ body {
     .task .task-duration-input {
         grid-column: 2;
         grid-row: 1;
-        width: 60px;
+        width: 70px;
         flex-shrink: 0;
     }
     
