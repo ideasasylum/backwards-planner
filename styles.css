@@ -272,12 +272,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--space-lg);
-}
-
-.stream-actions {
-    display: flex;
     gap: var(--space-sm);
-    align-items: center;
 }
 
 .stream-name-input {
@@ -297,14 +292,7 @@ body {
 }
 
 .remove-stream-btn {
-    padding: var(--space-sm) var(--space-md);
-    background: transparent;
     color: var(--text-muted);
-    border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: 500;
     transition: all 0.2s;
 }
 
@@ -417,17 +405,20 @@ body {
     padding: var(--space-sm) var(--space-md);
     background: transparent;
     color: var(--text-secondary);
-    border: none;
+    border: 1px dashed var(--border);
     border-radius: var(--radius);
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
     transition: all 0.2s;
+    width: 100%;
+    margin-top: var(--space-sm);
 }
 
 .add-task-btn:hover {
     background: var(--primary-color);
     color: white;
+    border-color: var(--primary-color);
 }
 
 .add-stream-btn {
@@ -585,10 +576,6 @@ body {
         gap: var(--space-md);
     }
     
-    .stream-actions {
-        flex-direction: column;
-        gap: var(--space-xs);
-    }
     
     .stream {
         padding: var(--space-md);
@@ -649,11 +636,6 @@ body {
         align-items: stretch;
     }
     
-    .stream-actions {
-        flex-direction: row;
-        justify-content: flex-end;
-        gap: var(--space-sm);
-    }
     
     .streams-footer {
         justify-content: center;
