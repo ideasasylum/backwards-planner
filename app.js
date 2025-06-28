@@ -2,12 +2,26 @@ class BackwardsTimer {
     constructor() {
         this.projects = this.loadProjects();
         this.currentProject = null;
+        this.debounceTimers = new Map();
         this.initializeUI();
     }
 
     initializeUI() {
         this.bindEvents();
         this.createInitialStream();
+    }
+
+    debounce(key, fn, delay = 1000) {
+        if (this.debounceTimers.has(key)) {
+            clearTimeout(this.debounceTimers.get(key));
+        }
+        
+        const timer = setTimeout(() => {
+            fn();
+            this.debounceTimers.delete(key);
+        }, delay);
+        
+        this.debounceTimers.set(key, timer);
     }
 
     bindEvents() {
@@ -118,6 +132,7 @@ class BackwardsTimer {
         if (stream) {
             stream.name = name;
         }
+        this.debounce(`stream-${streamId}`, () => this.autoCalculateTimeline());
     }
 
     updateTaskName(streamId, taskId, name) {
@@ -129,7 +144,7 @@ class BackwardsTimer {
                 task.name = name;
             }
         }
-        this.autoCalculateTimeline();
+        this.debounce(`task-${streamId}-${taskId}`, () => this.autoCalculateTimeline());
     }
 
     updateTaskDuration(streamId, taskId, duration) {
@@ -141,7 +156,7 @@ class BackwardsTimer {
                 task.duration = parseInt(duration) || 0;
             }
         }
-        this.autoCalculateTimeline();
+        this.debounce(`duration-${streamId}-${taskId}`, () => this.autoCalculateTimeline());
     }
 
     calculateTimeline() {
@@ -213,7 +228,7 @@ class BackwardsTimer {
         streamDiv.innerHTML = `
             <div class="stream-header">
                 <input type="text" class="stream-name-input" value="${stream.name}" placeholder="Name"
-                       onchange="app.updateStreamName('${stream.id}', this.value)">
+                       oninput="app.updateStreamName('${stream.id}', this.value)">
                 <div class="stream-actions">
                     <button class="add-task-btn" onclick="app.addTask('${stream.id}')">+ Add Step</button>
                     <button class="remove-stream-btn" onclick="app.removeStream('${stream.id}')">Remove</button>
@@ -231,10 +246,10 @@ class BackwardsTimer {
             <div class="task" draggable="true" data-task-id="${task.id}" data-stream-id="${streamId}">
                 <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
                 <input type="text" class="task-name-input" value="${task.name}" placeholder="Step"
-                       onchange="app.updateTaskName('${streamId}', '${task.id}', this.value)">
+                       oninput="app.updateTaskName('${streamId}', '${task.id}', this.value)">
                 <input type="number" class="task-duration-input" value="${task.duration}" 
                        placeholder="Minutes" min="1"
-                       onchange="app.updateTaskDuration('${streamId}', '${task.id}', this.value)">
+                       oninput="app.updateTaskDuration('${streamId}', '${task.id}', this.value)">
                 <button class="remove-task-btn" onclick="app.removeTask('${streamId}', '${task.id}')">×</button>
             </div>
         `;
