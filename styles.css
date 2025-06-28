@@ -141,8 +141,6 @@ body {
 }
 
 .stream {
-    background: var(--border-light);
-    border-radius: var(--radius);
     padding: var(--space-lg);
 }
 
