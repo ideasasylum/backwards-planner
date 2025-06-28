@@ -4,6 +4,7 @@ class BackwardsTimer {
         this.currentProject = null;
         this.debounceTimers = new Map();
         this.initializeUI();
+        this.autoLoadLastProject();
     }
 
     initializeUI() {
@@ -26,6 +27,7 @@ class BackwardsTimer {
 
     bindEvents() {
         document.getElementById('addStreamBtn').addEventListener('click', () => this.addStream());
+        document.getElementById('newBtn').addEventListener('click', () => this.newProject());
         document.getElementById('saveBtn').addEventListener('click', () => this.saveProject());
         document.getElementById('loadBtn').addEventListener('click', () => this.loadProject());
         
@@ -73,6 +75,38 @@ class BackwardsTimer {
             this.currentProject = this.createProject();
         }
         return this.currentProject;
+    }
+
+    autoLoadLastProject() {
+        const lastProjectId = localStorage.getItem('lastProjectId');
+        if (lastProjectId && this.projects[lastProjectId]) {
+            this.currentProject = this.deserializeProject({ ...this.projects[lastProjectId] });
+            this.loadProjectToUI();
+        }
+    }
+
+    newProject() {
+        if (this.currentProject && this.hasUnsavedChanges()) {
+            if (!confirm('You have unsaved changes. Start a new project anyway?')) {
+                return;
+            }
+        }
+        this.currentProject = this.createProject();
+        this.clearUI();
+        this.createInitialStream();
+    }
+
+    hasUnsavedChanges() {
+        const project = this.getCurrentProject();
+        return project.name || project.targetFinishTime || project.streams.length > 1 || 
+               (project.streams.length === 1 && (project.streams[0].name || project.streams[0].tasks.length > 1));
+    }
+
+    clearUI() {
+        document.getElementById('projectName').value = '';
+        document.getElementById('targetTime').value = '';
+        document.getElementById('streamsContainer').innerHTML = '';
+        document.getElementById('timelineContainer').innerHTML = '';
     }
 
     updateProjectName(name) {
@@ -344,6 +378,7 @@ class BackwardsTimer {
         
         this.projects[project.id] = { ...project };
         this.saveProjects();
+        localStorage.setItem('lastProjectId', project.id);
         alert('Project saved!');
     }
 
@@ -363,6 +398,7 @@ class BackwardsTimer {
         
         if (selectedKey && this.projects[selectedKey]) {
             this.currentProject = this.deserializeProject({ ...this.projects[selectedKey] });
+            localStorage.setItem('lastProjectId', selectedKey);
             this.loadProjectToUI();
             alert('Project loaded!');
         }
