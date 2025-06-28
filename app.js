@@ -129,6 +129,7 @@ class BackwardsTimer {
                 task.name = name;
             }
         }
+        this.autoCalculateTimeline();
     }
 
     updateTaskDuration(streamId, taskId, duration) {
