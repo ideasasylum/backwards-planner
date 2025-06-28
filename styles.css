@@ -322,9 +322,6 @@ body {
     transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-.task:hover {
-    box-shadow: var(--shadow);
-}
 
 .task.dragging {
     opacity: 0.5;
